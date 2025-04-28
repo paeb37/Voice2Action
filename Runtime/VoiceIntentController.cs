@@ -326,6 +326,7 @@ namespace Voice2Action
                             countProxy += 1;
                         }
                     }
+                    UpdateSelectionDisplay();
                     m_HistoryMessages.Add("<color=white>Assistant:</color> <color=green>" + countControllers +
                                           " objects selected\n</color>");
                     UpdateMessageDisplay("<color=white>Assistant:</color> <color=green>" + countControllers +
@@ -345,6 +346,9 @@ namespace Voice2Action
                 {
                     if (flag) countControllers++;
                 }
+
+                // NOT SURE IF NEEDED HERE
+                UpdateSelectionDisplay();
                 m_OpenAIStatus = (countControllers > 0);
                 if (m_OpenAIStatus)
                 {
@@ -453,6 +457,7 @@ namespace Voice2Action
                 m_SelectedControllers[i] = true;
             }
             m_SceneManager.ClearProxies();
+            UpdateSelectionDisplay();
         }
 
         /// <summary>
@@ -467,6 +472,7 @@ namespace Voice2Action
                 m_SelectedControllers[i] = true;
             }
             m_FadeActive = true;
+            UpdateSelectionDisplay();
         }
 
         /// <summary>
@@ -488,6 +494,22 @@ namespace Voice2Action
             textMeshProUGUI.fontSize = 10;
             textMeshProUGUI.color = Color.black;
             textMeshProUGUI.rectTransform.sizeDelta = new Vector2(200, 20);
+        }
+
+        private void UpdateSelectionDisplay()
+        {
+            // Update highlights for all selected objects
+            for (int i = 0; i < m_AllControllers.Length; i++)
+            {
+                if (m_SelectedControllers[i])
+                {
+                    m_AllControllers[i].SetSelectedHighlight(true);
+                }
+                else
+                {
+                    m_AllControllers[i].SetSelectedHighlight(false);
+                }
+            }
         }
     }
 }

@@ -38,6 +38,12 @@ namespace Voice2Action
         /// <value>All renderers of the attached game objects and its children.</value>
         public List<Renderer> renderers { get; private set; }
 
+        /// <value>Original color of the object before selection highlight.</value>
+        private Color m_OriginalColor;
+
+        /// <value>Whether the original color has been stored.</value>
+        private bool m_HasStoredOriginalColor;
+
         /// <summary>
         /// Initializes default properties of the attached game object, needs to be called right after class initialization.
         /// </summary>
@@ -294,5 +300,37 @@ namespace Voice2Action
         }
 
         #endregion
+
+        // THIS IS THE NEW METHOD
+
+        /// <summary>
+        /// Sets the highlight state of the object when selected or deselected.
+        /// </summary>
+        /// <param name="isSelected">Whether the object is selected.</param>
+        /// <returns>True if the highlight was successfully applied.</returns>
+        public bool SetSelectedHighlight(bool isSelected)
+        {
+            if (!m_IsInit) return false;
+            if (renderers == null || renderers.Count == 0) return false;
+
+            // Store original color if not already stored
+            if (!m_HasStoredOriginalColor)
+            {
+                m_OriginalColor = renderers[0].material.color;
+                m_HasStoredOriginalColor = true;
+                Debug.Log($"[ShapeController] Stored original color for {gameObject.name}: {m_OriginalColor}");
+            }
+
+            // Apply highlight color or restore original
+            Color targetColor = isSelected ? Color.yellow : m_OriginalColor;
+            foreach (var renderer in renderers)
+            {
+                var material = renderer.material;
+                material.color = targetColor;
+            }
+            Debug.Log($"[ShapeController] Set color for {gameObject.name} to {targetColor} (selected: {isSelected})");
+
+            return true;
+        }
     }
 }
