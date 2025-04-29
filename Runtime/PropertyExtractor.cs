@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Linq;
 
 namespace Voice2Action
 {
@@ -286,7 +287,17 @@ namespace Voice2Action
             {
                 orderedExtractDict.Add(targetProperty, extractDict[targetProperty]);
             }
-            Debug.Log($"[VoiceIntent] selectDict: {string.Join(", ", extractDict.Keys.Cast<string>().Zip(extractDict.Values.Cast<object>(), (k, v) => $"{k}: {v}"))}");
+
+            // for debugging only
+            var pairs = new List<string>();
+            foreach (System.Collections.DictionaryEntry entry in extractDict)
+            {
+                pairs.Add($"{entry.Key}: {entry.Value}");
+            }
+            Debug.Log($"[VoiceIntent] selectDict: {string.Join(", ", pairs)}");
+            
+            
+            
             return orderedExtractDict;
         }
     }
