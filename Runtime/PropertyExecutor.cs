@@ -86,8 +86,8 @@ namespace Voice2Action
                     ),
                 }),
             new FunctionCallGroup(
-                functionName: "ModifyPosition",
-                functionDescription: "Return the positional change.",
+                functionName: "ModifyPositionY",
+                functionDescription: "Return the Y-axis positional change.",
                 functionParams: new List<FunctionParamGroup>
                 {
                     new (
@@ -95,9 +95,9 @@ namespace Voice2Action
                         paramDescription: "the strength of modification.",
                         paramExamples: new List<Utils.FewShotPair>
                         {
-                            new (input: "three times further", output: "3"),
-                            new (input: "super far", output: "5"),
-                            new (input: "closer", output: "-1"),
+                            new (input: "up", output: "1"),
+                            new (input: "down", output: "-1"),
+                            new (input: "higher", output: "1"),
                         }
                     ),
                 }),

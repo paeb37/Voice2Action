@@ -86,9 +86,9 @@ namespace Voice2Action
                 // 3-DOF transform
                 // example instances: "taller", "much bigger", "a bit smaller",
                 (10, "ModifyScale"),
-                // 1-DOF positional transform to the player
-                // example instances: "much closer", "a bit further",
-                (10, "ModifyPosition"),
+                // Y-axis position transform
+                // example instances: "up", "down", "higher", "lower",
+                (10, "ModifyPositionY"),
             },
             fewShotPairs: new List<Utils.FewShotPair>
             {
@@ -99,12 +99,28 @@ namespace Voice2Action
                 // ),
                 // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
                 new (
-                    "make it a bit taller and very close",
-                    "ModifyScale: a bit taller, ModifyPosition: very close"
+                    "make it a bit taller and move it up",
+                    "ModifyScale: a bit taller, ModifyPositionY: up"
                 ),
                 new (
-                    "make them shorter",
-                    "ModifyScale: shorter"
+                    "make them shorter and move them down",
+                    "ModifyScale: shorter, ModifyPositionY: down"
+                ),
+                new (
+                    "move it higher",
+                    "ModifyPositionY: higher"
+                ),
+                new (
+                    "move the spheres higher",
+                    "ModifyPositionY: higher"
+                ),
+                new (
+                    "move the objects up",
+                    "ModifyPositionY: up"
+                ),
+                new (
+                    "move them down",
+                    "ModifyPositionY: down"
                 ),
             }
         );

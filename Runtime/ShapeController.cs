@@ -277,27 +277,41 @@ namespace Voice2Action
         }
 
         /// <summary>
+        /// Modify the position of current object along the Y axis.
+        /// </summary>
+        /// <param name="value">Magnitude of modification (-1 for down, 1 for up)</param>
+        /// <returns>Denote modification success.</returns>
+        public bool ModifyPositionY(float value)
+        {
+            var playerPosition = player.transform.position;
+            var controllerPosition = transform.position;
+            float moveAmount = 0.5f; // Base movement amount
+            
+            if (value < 0)
+            {
+                // Move down (negative Y)
+                controllerPosition.y -= moveAmount;
+            }
+            else
+            {
+                // Move up (positive Y)
+                controllerPosition.y += moveAmount;
+            }
+            
+            transform.position = controllerPosition;
+            return true;
+        }
+
+        /// <summary>
         /// Modify the position of current object.
         /// </summary>
         /// <param name="value">1-DOF magnitude of modification wrt. to the user.</param>
         /// <returns>Denote modification success.</returns>
-        public bool ModifyPosition(float value)
-        {
-            var playerPosition = player.transform.position;
-            var controllerPosition = transform.position;
-            if (value < 0)
-            {
-                controllerPosition.x -= -value / (1 - value) * (controllerPosition.x - playerPosition.x);
-                controllerPosition.z -= -value / (1 - value) * (controllerPosition.z - playerPosition.z);
-            }
-            else
-            {
-                controllerPosition.x += value / (1 + value) * (controllerPosition.x - playerPosition.x);
-                controllerPosition.z += value / (1 + value) * (controllerPosition.z - playerPosition.z);
-            }
-            transform.position = controllerPosition;
-            return true;
-        }
+        // public bool ModifyPosition(float value)
+        // {
+        //     // For backward compatibility, default to Y-axis movement
+        //     return ModifyPositionY(value);
+        // }
 
         #endregion
 
