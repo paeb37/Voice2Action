@@ -259,12 +259,14 @@ namespace Voice2Action
         {
             // Utility function to check if two colors are similar enough.
             // threshold: Strength of determining if two colors are similar, lower means more similar is needed to return True.
-            bool AreColorsSimilar(Color color1, Color color2, double threshold = 0.25)
+            bool AreColorsSimilar(Color color1, Color color2, double threshold = 0.15) // Made threshold more strict
             {
                 double distance = Math.Sqrt(
                     Math.Pow(color1.r - color2.r, 2) +
                     Math.Pow(color1.g - color2.g, 2) +
                     Math.Pow(color1.b - color2.b, 2));
+                
+                Debug.Log($"[GetColor] Comparing colors - Target: {color2}, Object: {color1}, Distance: {distance}, Threshold: {threshold}");
                 return distance <= threshold;
             }
             
@@ -272,12 +274,15 @@ namespace Voice2Action
             if (color.Count < 3) return false;
             float r = color[0], g = color[1], b = color[2];
             Color otherColor = new Color(r / 255f, g / 255f, b / 255f);
+            Debug.Log($"[GetColor] Looking for color: RGB({r}, {g}, {b}) -> Normalized({otherColor.r}, {otherColor.g}, {otherColor.b})");
+            
             foreach (var myRenderer in renderers)
             {
                 var controllerColor = myRenderer.material.color;
+                Debug.Log($"[GetColor] Checking object {gameObject.name} with color: {controllerColor}");
                 if (AreColorsSimilar(controllerColor, otherColor))
                 {
-                    // If at least one child of the object has the matched color, add it
+                    Debug.Log($"[GetColor] Found matching color on object {gameObject.name}");
                     return true;
                 }
             }
