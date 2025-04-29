@@ -286,6 +286,7 @@ namespace Voice2Action
             {
                 orderedExtractDict.Add(targetProperty, extractDict[targetProperty]);
             }
+            Debug.Log($"[VoiceIntent] selectDict: {string.Join(", ", extractDict.Keys.Cast<string>().Zip(extractDict.Values.Cast<object>(), (k, v) => $"{k}: {v}"))}");
             return orderedExtractDict;
         }
     }

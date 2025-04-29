@@ -276,15 +276,17 @@ namespace Voice2Action
             Color otherColor = new Color(r / 255f, g / 255f, b / 255f);
             Debug.Log($"[GetColor] Looking for color: RGB({r}, {g}, {b}) -> Normalized({otherColor.r}, {otherColor.g}, {otherColor.b})");
             
-            foreach (var myRenderer in renderers)
+            // Use the stored original color for comparison
+            if (!m_HasStoredOriginalColor)
             {
-                var controllerColor = myRenderer.material.color;
-                Debug.Log($"[GetColor] Checking object {gameObject.name} with color: {controllerColor}");
-                if (AreColorsSimilar(controllerColor, otherColor))
-                {
-                    Debug.Log($"[GetColor] Found matching color on object {gameObject.name}");
-                    return true;
-                }
+                // Fallback: get the color from the first renderer if not already stored
+                m_OriginalColor = renderers[0].material.color;
+                m_HasStoredOriginalColor = true;
+            }
+            if (AreColorsSimilar(m_OriginalColor, otherColor))
+            {
+                Debug.Log($"[GetColor] Found matching color on object {gameObject.name}");
+                return true;
             }
             return false;
         }
@@ -361,6 +363,8 @@ namespace Voice2Action
         /// </summary>
         /// <param name="isSelected">Whether the object is selected.</param>
         /// <returns>True if the highlight was successfully applied.</returns>
+        
+        // THIS METHOD IS CALLED FOR EACH OBJECT IN THE SCENE
         public bool SetSelectedHighlight(bool isSelected)
         {
             if (!m_IsInit) return false;
@@ -381,7 +385,9 @@ namespace Voice2Action
                 var material = renderer.material;
                 material.color = targetColor;
             }
-            Debug.Log($"[ShapeController] Set color for {gameObject.name} to {targetColor} (selected: {isSelected})");
+
+            // CHECK HOW MANY TIMES THIS IS PRINTED
+            Debug.Log($"[ShapeController] TRIGGERED - Set color for {gameObject.name} to {targetColor} (selected: {isSelected})");
 
             return true;
         }
