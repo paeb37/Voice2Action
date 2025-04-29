@@ -25,7 +25,7 @@ namespace Voice2Action
                 // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
                 // RGB values
                 // example instances: "red", "green", "dark blue", "cyan", "light yellow", "white", "colorful",
-                (10, "GetColor"),
+                (10, "GetColor"), // NEED THIS
                 // embedding matches
                 // example instances: "XXX Street", "YYY Ave",
                 // (10, "GetAddress"),
@@ -77,6 +77,14 @@ namespace Voice2Action
                     "find blue objects",
                     "GetColor: blue"
                 ),
+                new (
+                    "get all green things",
+                    "GetColor: green"
+                ),
+                new (
+                    "select white spheres on the left",
+                    "GetColor: white, GetShape: spheres, GetDirection: on the left"
+                ),
             }
         );
         
@@ -90,11 +98,6 @@ namespace Voice2Action
             orderedProperties: new List<(int, string)>
             {
                 // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
-                // RGB values
-                // example instances: "red", "green", "dark blue", "cyan", "light yellow", "white", "colorful",
-                // (10, "ModifyColor"),
-                // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
-                
                 // 3-DOF transform
                 // example instances: "taller", "much bigger", "a bit smaller",
                 (10, "ModifyScale"),
@@ -104,11 +107,6 @@ namespace Voice2Action
             },
             fewShotPairs: new List<Utils.FewShotPair>
             {
-                // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
-                // new (
-                //     "make the buildings far, then change to red",
-                //     "ModifyColor: red, ModifyPosition: far"
-                // ),
                 // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
                 new (
                     "make it a bit taller and move it up",

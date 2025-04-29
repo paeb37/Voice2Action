@@ -30,7 +30,7 @@ namespace Voice2Action
             {
                 new (
                     "select the tallest building, and make it super short and red",
-                    "select: select the tallest building, modify: make it super short and red"
+                    "select: select the tallest building and red, modify: make it super short"
                 ),
                 new (
                     "get cars",
@@ -39,6 +39,10 @@ namespace Voice2Action
                 new (
                     "throw it away",
                     "modify: throw it away"
+                ),
+                new (
+                    "select blue objects",
+                    "select: select blue objects"
                 ),
             }
         );

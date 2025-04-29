@@ -80,11 +80,6 @@ namespace Voice2Action
                         }),
                 }),
             // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
-            // new FunctionCallGroup(
-            //     functionName: "ModifyColor",
-            //     functionDescription: "Return the RGB value of given color."
-            // ),
-            // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
             new FunctionCallGroup(
                 functionName: "ModifyScale",
                 functionDescription: "Return the size change in x-axis width, y-axis height, z-axis width.",
