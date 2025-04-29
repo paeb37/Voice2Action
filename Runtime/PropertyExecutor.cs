@@ -100,6 +100,22 @@ namespace Voice2Action
                         }
                     ),
                 }),
+            new FunctionCallGroup( // just keep this as default
+                functionName: "ModifyPosition",
+                functionDescription: "Return the positional change.",
+                functionParams: new List<FunctionParamGroup>
+                {
+                    new (
+                        paramName: "value",
+                        paramDescription: "the strength of modification.",
+                        paramExamples: new List<Utils.FewShotPair>
+                        {
+                            new (input: "up", output: "1"),
+                            new (input: "down", output: "-1"),
+                            new (input: "higher", output: "1"),
+                        }
+                    ),
+                }),
             new FunctionCallGroup(
                 functionName: "ModifyPositionY",
                 functionDescription: "Return the Y-axis positional change.",

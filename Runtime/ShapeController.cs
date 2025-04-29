@@ -341,11 +341,11 @@ namespace Voice2Action
         /// </summary>
         /// <param name="value">1-DOF magnitude of modification wrt. to the user.</param>
         /// <returns>Denote modification success.</returns>
-        // public bool ModifyPosition(float value)
-        // {
-        //     // For backward compatibility, default to Y-axis movement
-        //     return ModifyPositionY(value);
-        // }
+        public bool ModifyPosition(float value)
+        {
+            // For backward compatibility, default to Y-axis movement
+            return ModifyPositionY(value);
+        }
 
         #endregion
 
