@@ -250,6 +250,40 @@ namespace Voice2Action
             return myDiff > otherDiff;
         }
 
+        /// <summary>
+        /// Select object with similar colors.
+        /// </summary>
+        /// <param name="color">RGB values of color in range [0-255].</param>
+        /// <returns>Denote selection success.</returns>
+        public bool GetColor(List<int> color)
+        {
+            // Utility function to check if two colors are similar enough.
+            // threshold: Strength of determining if two colors are similar, lower means more similar is needed to return True.
+            bool AreColorsSimilar(Color color1, Color color2, double threshold = 0.25)
+            {
+                double distance = Math.Sqrt(
+                    Math.Pow(color1.r - color2.r, 2) +
+                    Math.Pow(color1.g - color2.g, 2) +
+                    Math.Pow(color1.b - color2.b, 2));
+                return distance <= threshold;
+            }
+            
+            if (color == null) return false;
+            if (color.Count < 3) return false;
+            float r = color[0], g = color[1], b = color[2];
+            Color otherColor = new Color(r / 255f, g / 255f, b / 255f);
+            foreach (var myRenderer in renderers)
+            {
+                var controllerColor = myRenderer.material.color;
+                if (AreColorsSimilar(controllerColor, otherColor))
+                {
+                    // If at least one child of the object has the matched color, add it
+                    return true;
+                }
+            }
+            return false;
+        }
+
         #endregion
 
         // atomic functions for modification

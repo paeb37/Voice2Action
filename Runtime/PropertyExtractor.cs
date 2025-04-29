@@ -25,7 +25,7 @@ namespace Voice2Action
                 // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
                 // RGB values
                 // example instances: "red", "green", "dark blue", "cyan", "light yellow", "white", "colorful",
-                // (10, "GetColor"),
+                (10, "GetColor"),
                 // embedding matches
                 // example instances: "XXX Street", "YYY Ave",
                 // (10, "GetAddress"),
@@ -64,6 +64,18 @@ namespace Voice2Action
                 new (
                     "signs at least five m on my left",
                     "GetShape: signs, GetDistance: at least five m, GetDirection: on my left"
+                ),
+                new (
+                    "get yellow spheres",
+                    "GetColor: yellow, GetShape: spheres"
+                ),
+                new (
+                    "select the red cubes",
+                    "GetColor: red, GetShape: cubes"
+                ),
+                new (
+                    "find blue objects",
+                    "GetColor: blue"
                 ),
             }
         );

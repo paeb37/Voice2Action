@@ -23,10 +23,25 @@ namespace Voice2Action
         private List<FunctionCallGroup> m_FunctionCallGroups = new()
         {
             // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
-            // new FunctionCallGroup(
-            //     functionName: "GetColor",
-            //     functionDescription: "Extract the RGB value of given color."
-            // ),
+            new FunctionCallGroup(
+                functionName: "GetColor",
+                functionDescription: "Extract the RGB value of given color.",
+                functionParams: new List<FunctionParamGroup>
+                {
+                    new (
+                        paramName: "color",
+                        paramDescription: "RGB values of the color in range [0-255]",
+                        paramExamples: new List<Utils.FewShotPair>
+                        {
+                            new (input: "red", output: "[255, 0, 0]"),
+                            new (input: "green", output: "[0, 255, 0]"),
+                            new (input: "blue", output: "[0, 0, 255]"),
+                            new (input: "yellow", output: "[255, 255, 0]"),
+                            new (input: "white", output: "[255, 255, 255]"),
+                            new (input: "black", output: "[0, 0, 0]"),
+                        }
+                    ),
+                }),
             // ------------Added for CityDemo in MyShapeController, user can define their own through code or hierarchy------------
             new FunctionCallGroup(
                 functionName: "GetDistance",
