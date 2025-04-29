@@ -326,7 +326,7 @@ namespace Voice2Action
         {
             var playerPosition = player.transform.position;
             var controllerPosition = transform.position;
-            float moveAmount = 0.5f; // Base movement amount
+            float moveAmount = 1.5f; // Base movement amount
             
             if (value < 0)
             {
